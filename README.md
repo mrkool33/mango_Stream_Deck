@@ -1,8 +1,17 @@
-# Stream Deck Application
+# 🥭 Mango Stream Deck
 
-A professional Python-based Stream Deck clone with a modern GUI, customizable button grid, and multiple action types.
+A professional Python-based Stream Deck application with a modern GUI, customizable button grid, and multiple action types.
 
-## Features
+[![Download Latest Release](https://github.com/mrkool33/mango_Stream_Deck/releases/latest)
+[![Downloads](https://github.com/mrkool33/mango_Stream_Deck/releases)
+
+## 📥 Download
+
+**[Download Latest Release](https://github.com/mrkool33/mango_Stream_Deck/releases/latest)** - Windows 10/11
+
+Extract the ZIP file and run `Mango Stream Deck.exe` - no installation required!
+
+## ✨ Features
 
 ### Button Customization
 
@@ -40,7 +49,9 @@ A professional Python-based Stream Deck clone with a modern GUI, customizable bu
 - **Session Recovery**: Automatically loads previous button configurations
 - **Reset to Defaults**: One-click reset with warning confirmation
 
-## Requirements
+## 💻 For Developers
+
+### Requirements
 
 - Python 3.12+
 - tkinter (included with Python)
@@ -48,13 +59,13 @@ A professional Python-based Stream Deck clone with a modern GUI, customizable bu
 - Pillow 12.0.0
 - (Optional) pyautogui - for hotkey and text typing features
 
-## Installation
+### Installation
 
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
-cd Stream\ Deck
+git clone https://github.com/mrkool33/mango_Stream_Deck.git
+cd mango_Stream_Deck
 ```
 
 2. Install required packages:
@@ -69,7 +80,18 @@ pip install customtkinter Pillow pyautogui
 python main.py
 ```
 
-## Usage
+### Building Executable
+
+To create a standalone executable:
+
+```bash
+pip install pyinstaller
+pyinstaller --onefile --windowed --icon=icon.ico --name="Mango Stream Deck" --add-data "logos;logos" main.py --clean
+```
+
+The executable will be in the `dist` folder.
+
+## 🎯 Usage
 
 ### Basic Setup
 
@@ -130,14 +152,20 @@ python main.py
 - **Theme**: Dark or Light mode
 - **Reset to Defaults**: Clear all configurations and icons
 
-## File Structure
+## 📁 File Structure
 
 ```
-Stream Deck/
+mango_Stream_Deck/
 ├── main.py                 # Main application file
+├── create_icon.py          # Icon creation utility
+├── icon.ico                # Application icon
 ├── button_config.json      # Saved button configurations (auto-generated)
 ├── icons/                  # Folder for stored button icons
-├── README.md              # This file
+├── logos/                  # Application logos
+│   ├── mango_256_transparent.png
+│   └── mango_32_transparent.png
+├── dist/                   # Built executable (after PyInstaller)
+└── README.md               # This file
 ```
 
 ## Keyboard Shortcuts
@@ -174,7 +202,7 @@ Stream Deck/
 }
 ```
 
-## Troubleshooting
+## 🔧 Troubleshooting
 
 **Icons not loading**: Ensure images are in supported formats (PNG, JPG, GIF, BMP)
 
@@ -184,7 +212,9 @@ Stream Deck/
 
 **CustomTkinter errors**: Update to the latest version: `pip install --upgrade customtkinter`
 
-## Future Enhancements
+**Executable not running**: Make sure the `logos` folder is in the same directory as the `.exe` file
+
+## 🚀 Future Enhancements
 
 - Multi Action sequences
 - Custom button layouts
@@ -193,10 +223,23 @@ Stream Deck/
 - Plugin system for extensions
 - Advanced scheduling options
 
-## License
+## 📄 License
 
 This project is open source and available under the MIT License.
 
-## Contributing
+## 🤝 Contributing
 
-Contributions are welcome! Feel free to submit issues and enhancement requests.
+Contributions are welcome! Feel free to:
+
+- Report bugs
+- Suggest new features
+- Submit pull requests
+- Improve documentation
+
+## 👨‍💻 Author
+
+Created by [mrkool33](https://github.com/mrkool33)
+
+## ⭐ Support
+
+If you like this project, please give it a star on GitHub!
