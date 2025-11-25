@@ -15,6 +15,13 @@ class StreamDeckApp:
         self.root.title("Mango Stream Deck")
         self.root.geometry("900x700")
         
+        # Set window icon
+        try:
+            if os.path.exists("icon.ico"):
+                self.root.iconbitmap("icon.ico")
+        except Exception as e:
+            print(f"Could not load icon: {e}")
+        
         # Set appearance mode
         ctk.set_appearance_mode("dark")  # "dark" or "light"
         ctk.set_default_color_theme("blue")
@@ -192,6 +199,13 @@ class StreamDeckApp:
         dialog.transient(self.root)
         dialog.grab_set()
         
+        # Set dialog icon
+        try:
+            if os.path.exists("icon.ico"):
+                dialog.iconbitmap("icon.ico")
+        except:
+            pass
+        
         # Configure dialog to use CTk appearance
         if self.current_theme == "dark":
             dialog.configure(bg="#2b2b2b")
@@ -202,12 +216,24 @@ class StreamDeckApp:
         settings_frame = ctk.CTkFrame(dialog)
         settings_frame.pack(fill="both", expand=True, padx=20, pady=20)
         
+        # Logo at top
+        try:
+            if os.path.exists("logos/mango_256_transparent.png"):
+                logo_img = Image.open("logos/mango_256_transparent.png")
+                logo_img = logo_img.resize((60, 60), Image.Resampling.LANCZOS)
+                logo_photo = ctk.CTkImage(light_image=logo_img, dark_image=logo_img, size=(60, 60))
+                logo_label = ctk.CTkLabel(settings_frame, image=logo_photo, text="")
+                logo_label.image = logo_photo
+                logo_label.pack(pady=(10, 5))
+        except:
+            pass
+        
         # Title
         ctk.CTkLabel(
             settings_frame,
             text="Application Settings",
             font=("Arial", 18, "bold")
-        ).pack(pady=(10, 20))
+        ).pack(pady=(5, 20))
         
         # Grid Settings Section
         grid_section = ctk.CTkFrame(settings_frame)
@@ -415,6 +441,13 @@ class StreamDeckApp:
         dialog.transient(self.root)
         dialog.grab_set()
         
+        # Set dialog icon
+        try:
+            if os.path.exists("icon.ico"):
+                dialog.iconbitmap("icon.ico")
+        except:
+            pass
+        
         # Configure dialog theme
         if self.current_theme == "dark":
             dialog.configure(bg="#2b2b2b")
@@ -425,12 +458,24 @@ class StreamDeckApp:
         scrollable_frame = ctk.CTkScrollableFrame(dialog, width=660, height=750)
         scrollable_frame.pack(fill="both", expand=True, padx=15, pady=15)
         
+        # Logo at top
+        try:
+            if os.path.exists("logos/mango_256_transparent.png"):
+                logo_img = Image.open("logos/mango_256_transparent.png")
+                logo_img = logo_img.resize((80, 80), Image.Resampling.LANCZOS)
+                logo_photo = ctk.CTkImage(light_image=logo_img, dark_image=logo_img, size=(80, 80))
+                logo_label = ctk.CTkLabel(scrollable_frame, image=logo_photo, text="")
+                logo_label.image = logo_photo
+                logo_label.pack(pady=(10, 5))
+        except:
+            pass
+        
         # Title
         ctk.CTkLabel(
             scrollable_frame,
             text="📚 Stream Deck - User Guide",
             font=("Arial", 24, "bold")
-        ).pack(pady=(10, 20))
+        ).pack(pady=(5, 20))
         
         # Instructions sections
         sections = [
@@ -672,6 +717,13 @@ class StreamDeckApp:
         dialog.grab_set()
         dialog.resizable(False, False)
         
+        # Set dialog icon
+        try:
+            if os.path.exists("icon.ico"):
+                dialog.iconbitmap("icon.ico")
+        except:
+            pass
+        
         # Configure dark theme for dialog
         if self.current_theme == "dark":
             dialog.configure(bg="#2b2b2b")
@@ -714,9 +766,21 @@ class StreamDeckApp:
         main_container = ctk.CTkFrame(scrollable_frame, fg_color="transparent")
         main_container.pack(fill="both", expand=True)
         
-        # Header
+        # Header with logo
         header_frame = ctk.CTkFrame(main_container, fg_color="transparent")
         header_frame.pack(fill="x", pady=(0, 15))
+        
+        # Logo at top of customize dialog
+        try:
+            if os.path.exists("logos/mango_256_transparent.png"):
+                logo_img = Image.open("logos/mango_256_transparent.png")
+                logo_img = logo_img.resize((50, 50), Image.Resampling.LANCZOS)
+                logo_photo = ctk.CTkImage(light_image=logo_img, dark_image=logo_img, size=(50, 50))
+                logo_label = ctk.CTkLabel(header_frame, image=logo_photo, text="")
+                logo_label.image = logo_photo
+                logo_label.pack(pady=(0, 5))
+        except:
+            pass
         
         ctk.CTkLabel(
             header_frame,
