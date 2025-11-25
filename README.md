@@ -2,8 +2,8 @@
 
 A professional Python-based Stream Deck application with a modern GUI, customizable button grid, and multiple action types.
 
-[![Download Latest Release](https://github.com/mrkool33/mango_Stream_Deck/releases/latest)
-[![Downloads](https://github.com/mrkool33/mango_Stream_Deck/releases)
+[![Download Latest Release](https://img.shields.io/github/v/release/mrkool33/mango_Stream_Deck)](https://github.com/mrkool33/mango_Stream_Deck/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/mrkool33/mango_Stream_Deck/total)](https://github.com/mrkool33/mango_Stream_Deck/releases)
 
 ## 📥 Download
 
