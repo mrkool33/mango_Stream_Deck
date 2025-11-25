@@ -238,7 +238,7 @@ Contributions are welcome! Feel free to:
 
 ## 👨‍💻 Author
 
-Created by [mrkool33](https://github.com/mrkool33)
+Created by [ALKHATAB ISEHAQ SAIF](https://github.com/mrkool33)
 
 ## ⭐ Support
 
