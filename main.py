@@ -7,6 +7,9 @@ import os
 import subprocess
 import shutil
 from pathlib import Path
+import pystray
+from pystray import MenuItem as item
+import threading
 
 
 class StreamDeckApp:
@@ -52,11 +55,21 @@ class StreamDeckApp:
         if not os.path.exists(self.icons_folder):
             os.makedirs(self.icons_folder)
         
+        # System tray icon
+        self.tray_icon = None
+        self.is_quitting = False
+        
         # Load saved configurations
         self.load_config()
         
         # Create main container
         self.create_widgets()
+        
+        # Setup system tray
+        self.setup_tray_icon()
+        
+        # Handle window close event
+        self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
         
     def create_widgets(self):
         # Main frame
@@ -1786,6 +1799,75 @@ class StreamDeckApp:
                         self.button_configs = {int(k): v for k, v in loaded.items()}
         except Exception as e:
             print(f"Error loading config: {e}")
+    
+    def setup_tray_icon(self):
+        """Setup system tray icon"""
+        try:
+            # Load icon image - use .ico file for Windows taskbar
+            icon_image = None
+            
+            # Try to use the .ico file first (best for Windows)
+            if os.path.exists("icon.ico"):
+                icon_image = Image.open("icon.ico")
+            elif os.path.exists("logos/mango_32_transparent.png"):
+                icon_image = Image.open("logos/mango_32_transparent.png")
+            elif os.path.exists("logos/mango_256_transparent.png"):
+                icon_image = Image.open("logos/mango_256_transparent.png")
+                icon_image = icon_image.resize((32, 32), Image.Resampling.LANCZOS)
+            else:
+                # Create a simple colored icon if no logo found
+                icon_image = Image.new('RGB', (32, 32), color='#FF9800')
+            
+            # Create menu
+            menu = (
+                item('Show', self.show_window, default=True),
+                item('Hide', self.hide_window),
+                item('Quit', self.quit_app)
+            )
+            
+            # Create tray icon
+            self.tray_icon = pystray.Icon(
+                "Mango Stream Deck",
+                icon_image,
+                "Mango Stream Deck",
+                menu
+            )
+            
+            # Run tray icon in separate thread
+            threading.Thread(target=self.tray_icon.run, daemon=True).start()
+            
+        except Exception as e:
+            print(f"Error setting up tray icon: {e}")
+    
+    def on_closing(self):
+        """Handle window close event - minimize to tray instead of closing"""
+        self.hide_window()
+    
+    def hide_window(self, icon=None, item=None):
+        """Hide window to system tray"""
+        self.root.withdraw()
+        if self.status_label.winfo_exists():
+            self.status_label.configure(text="Minimized to system tray")
+    
+    def show_window(self, icon=None, item=None):
+        """Show window from system tray"""
+        self.root.deiconify()
+        self.root.lift()
+        self.root.focus_force()
+        if self.status_label.winfo_exists():
+            self.status_label.configure(text="Restored from system tray")
+    
+    def quit_app(self, icon=None, item=None):
+        """Completely quit the application"""
+        self.is_quitting = True
+        
+        # Stop tray icon
+        if self.tray_icon:
+            self.tray_icon.stop()
+        
+        # Destroy window
+        self.root.quit()
+        self.root.destroy()
 
 
 def main():
